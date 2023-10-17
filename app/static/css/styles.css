@@ -1,0 +1,92 @@
+body {
+    background: linear-gradient(90deg, rgb(64, 72, 110), rgb(34, 102, 117));
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+.navbar-nav .active {
+  background-color: #1e1b2c;
+  border-radius: 10px;
+  font-size: large;
+  width: 110px;
+
+}
+
+.navbar{
+  border-radius: 0;
+  background: linear-gradient(90deg, rgb(51, 87, 92), rgb(34, 34, 56));
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  position: relative;
+  top: 10px;
+}
+
+.navbar-brand
+{
+  margin-right: 30px;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 30px;
+}
+
+
+.contain{
+  background: linear-gradient(90deg, rgb(230, 244, 236), rgb(246, 255, 248));
+  width: 1810px;
+  height: 940px;
+  margin:  0 auto;
+  position: relative;
+  top: 10px;
+  border-radius: 20px;
+  
+}
+
+.content{
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+  top: 20px;
+  left: 3%;
+}
+
+.dash_student{
+  width: 300px;
+  height: 150px;
+  background-color: rgb(255, 255, 255);
+  border: solid black;
+  margin: 20px;
+  position: relative;
+  left:20px;
+  border-radius: 20px;
+}
+.dash_course{
+  width: 300px;
+  height: 150px;
+  background-color: rgb(255, 255, 255);
+  border: solid rgb(0, 0, 0);
+  margin: 20px;
+  position: relative;
+  left:20px;
+  border-radius: 20px;
+}
+.dash_college{
+  width: 300px;
+  height: 150px;
+  background-color: rgb(255, 255, 255);
+  border: solid black;
+  margin: 20px;
+  position: relative;
+  left:20px;
+  border-radius: 20px;
+}
+
+.btn {
+  float: left;
+}
