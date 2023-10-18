@@ -12,7 +12,6 @@ def create_app():
         #BOOTSTRAP_SERVE_LOCAL=BOOTSTRAP_SERVE_LOCAL
 
     )
-
     from .views import views
 
     app.register_blueprint(views, url_prefix = "/")
