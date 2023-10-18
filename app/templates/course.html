@@ -2,6 +2,63 @@
 {% block title %}Courses{% endblock %}
 
 {% block content %}
-<h1>COURSE SHEESH</h1>
+<br>
+<div class="form-group" style="margin-left: 10px;">
+    <form>
+      <div class="form-row">
+          <div class="form-group col-md-2">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CD" placeholder="Course Code">
+          </div>
+          <div class="form-group col-md-4">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_NM" placeholder="Course Name">
+          </div>
+          <div class="form-group col-md-4">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CLG" placeholder="College">
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Course</button>
+  </form>
+  </div>
+<br>
+<br>
+  <table class="table table-striped table-bordered" style="text-align: left;">
+    <thead class="thead-dark">
+      <tr class="table-info">
+        <th scope="col">Course Code</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">College</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BSCS</td>
+        <td>Bachelor of Science in Computer Science</td>
+        <td>College of Computer Studies</td>
+        <td>
+            <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+      </tr>
+      <tr>
+        <td>BSCS</td>
+        <td>Bachelor of Science in Computer Science</td>
+        <td>College of Computer Studies</td>
+        <td>
+            <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+      </tr>
+      <tr>
+        <td>BSCS</td>
+        <td>Bachelor of Science in Computer Science</td>
+        <td>College of Computer Studies</td>
+        <td>
+            <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
 
 {% endblock %}
