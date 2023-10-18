@@ -4,24 +4,24 @@
 {% block content %}
 <br>
 <div class="form-group" style="margin-left: 10px;">
-  <form>
+  <form method="POST">
     <div class="form-row">
         <div class="form-group col-md-2">
-            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputID" placeholder="ID">
+            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputID" name="inputID" placeholder="ID">
         </div>
         <div class="form-group col-md-4">
-            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputFirstName" placeholder="First Name">
+            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="First Name">
         </div>
         <div class="form-group col-md-4">
-            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputLastName" placeholder="Last Name">
+            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputLastName"name="inputLastName" placeholder="Last Name">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCourse" placeholder="Course Code">
+            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCourse"name="inputCourse" placeholder="Course Code">
         </div>
         <div class="form-group col-md-2">
-          <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputYear">
+          <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputYear" name="inputYear">
             <option selected disabled>Select Year Level</option>
             <option value="male">1st Year</option>
             <option value="female">2nd Year</option>
@@ -31,7 +31,7 @@
         </select>
         </div>
         <div class="form-group col-md-4">
-          <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputGender">
+          <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputGender" name="inputGender">
               <option selected disabled>Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -68,7 +68,7 @@
         <td>Male</td>
         <td>3rd Year</td>
         <td>
-          <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
           <button type="button" class="btn btn-danger">Delete</button>
         </td>
       </tr>
@@ -80,7 +80,7 @@
         <td>Male</td>
         <td>3rd Year</td>
         <td>
-          <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
           <button type="button" class="btn btn-danger">Delete</button>
         </td>
       </tr>
@@ -92,7 +92,7 @@
         <td>Male</td>
         <td>3rd Year</td>
         <td>
-          <button type="button"  style="margin-right: 20px;" class="btn btn-warning">Edit</button>
+          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
           <button type="button" class="btn btn-danger">Delete</button>
         </td>
       </tr>

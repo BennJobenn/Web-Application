@@ -4,16 +4,16 @@
 {% block content %}
 <br>
 <div class="form-group" style="margin-left: 10px;">
-    <form>
+    <form method="POST">
       <div class="form-row">
           <div class="form-group col-md-2">
-              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CD" placeholder="Course Code">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CD" name="inputCOURSE_CD" placeholder="Course Code">
           </div>
           <div class="form-group col-md-4">
-              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_NM" placeholder="Course Name">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_NM" name="inputCOURSE_NM" placeholder="Course Name">
           </div>
           <div class="form-group col-md-4">
-              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CLG" placeholder="College">
+              <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOURSE_CLG" name="inputCOURSE_CLG" placeholder="College">
           </div>
       </div>
       <button type="submit" class="btn btn-primary">Add Course</button>
