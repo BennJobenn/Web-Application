@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_mysql_connector import MySQL
 from config import DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, SECRET_KEY, BOOTSTRAP_SERVE_LOCAL
 
 def create_app():
@@ -12,6 +13,9 @@ def create_app():
         #BOOTSTRAP_SERVE_LOCAL=BOOTSTRAP_SERVE_LOCAL
 
     )
+    mysql = MySQL(app)
+
+
     from .views import views
 
     app.register_blueprint(views, url_prefix = "/")

@@ -17,8 +17,14 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-4">
-            <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCourse"name="inputCourse" placeholder="Course Code">
+        <div class="form-group col-md-2">
+          <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputCourse" name="inputCourse">
+            <option selected disabled>Select Course Code</option>
+            {% for course in courses %}
+            <option value="{{course.course_code}}">{{course.course_code}}({{course.course_name}})</option>
+            {% endfor %}
+
+        </select>
         </div>
         <div class="form-group col-md-2">
           <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputYear" name="inputYear">
@@ -68,34 +74,11 @@
         <td>Male</td>
         <td>3rd Year</td>
         <td>
-          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
-          <button type="button" class="btn btn-danger">Delete</button>
+          <a href="/editing_stud" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
+          <button type="button" class="btn btn-danger" onclick="return confirm('Delete student data?')" >Delete</button>
         </td>
       </tr>
-      <tr>
-        <td>2021-0615</td>
-        <td>Paul Jovenn</td>
-        <td>Sarmiento</td>
-        <td>BSCS</td>
-        <td>Male</td>
-        <td>3rd Year</td>
-        <td>
-          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
-          <button type="button" class="btn btn-danger">Delete</button>
-        </td>
-      </tr>
-      <tr>
-        <td>2021-0615</td>
-        <td>Paul Jovenn</td>
-        <td>Sarmiento</td>
-        <td>BSCS</td>
-        <td>Male</td>
-        <td>3rd Year</td>
-        <td>
-          <a href="/editing" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
-          <button type="button" class="btn btn-danger">Delete</button>
-        </td>
-      </tr>
+
     </tbody>
   </table>
 {% endblock %}
