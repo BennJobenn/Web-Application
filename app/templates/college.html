@@ -30,15 +30,16 @@
       </tr>
     </thead>
     <tbody>
+      {% for college in colleges %}
       <tr>
-        <td>CCS</td>
-        <td>College of Computer Studies</td>
+        <td>{{college.code}}</td>
+        <td>{{college.name}}</td>
         <td>
           <a href="/editing_coll" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
-            <button type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-danger" onclick="return confirm('Delete college data?')" >Delete</button>
           </td>
       </tr>
-
+      {% endfor %}
     </tbody>
   </table>
 

@@ -21,7 +21,7 @@
           <select class="custom-select" style="border: solid black 2px; border-radius: 10px;" id="inputCourse" name="inputCourse">
             <option selected disabled>Select Course Code</option>
             {% for course in courses %}
-            <option value="{{course.course_code}}">{{course.course_code}}({{course.course_name}})</option>
+            <option value="{{course.code}}">{{course.code}}</option>
             {% endfor %}
 
         </select>
@@ -66,19 +66,20 @@
       </tr>
     </thead>
     <tbody>
+      {% for student in students %}
       <tr>
-        <td>2021-0615</td>
-        <td>Paul Jovenn</td>
-        <td>Sarmiento</td>
-        <td>BSCS</td>
-        <td>Male</td>
-        <td>3rd Year</td>
+        <td>{{student.id}}</td>
+        <td>{{student.firstname}}</td>
+        <td>{{student.lastname}}</td>
+        <td>{{student.course_code}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.year}}</td>
         <td>
           <a href="/editing_stud" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
           <button type="button" class="btn btn-danger" onclick="return confirm('Delete student data?')" >Delete</button>
         </td>
       </tr>
-
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request
+from app.models import studentmodel, coursemodel, collegemodel
+
 
 views = Blueprint('views', __name__)
 
@@ -8,18 +10,19 @@ def index():
 
 @views.route('/students', methods=['GET', 'POST'])
 def student():
-
-    return render_template("student.html")
+    students = studentmodel.get_students()
+    courses = coursemodel.get_courses()
+    return render_template("student.html", students= students, courses=courses)
 
 @views.route('/course', methods=['GET', 'POST'])
 def course():
-
-    return render_template("course.html")
+    courses = coursemodel.get_courses()
+    return render_template("course.html", courses=courses)
 
 @views.route('/college', methods=['GET', 'POST'])
 def college():
-
-    return render_template("college.html")
+    colleges = collegemodel.get_colleges()
+    return render_template("college.html", colleges=colleges)
 
 
 @views.route('/editing_stud')
