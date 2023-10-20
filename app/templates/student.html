@@ -45,7 +45,7 @@
           </select>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Add Student</button>
+    <button type="submit" onclick="return confirm('Confirm adding student to data?')" class="btn btn-primary">Add Student</button>
 </form>
 </div>
 
@@ -67,7 +67,7 @@
     </thead>
     <tbody>
       {% for student in students %}
-      <tr>
+      <tr style="font-size: 17px;">
         <td>{{student.id}}</td>
         <td>{{student.firstname}}</td>
         <td>{{student.lastname}}</td>

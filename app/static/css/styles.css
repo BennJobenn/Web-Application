@@ -40,12 +40,12 @@ a:hover {
 .contain{
   background: linear-gradient(90deg, rgb(230, 244, 236), rgb(246, 255, 248));
   width: 1810px;
-  height: 940px;
+  min-height: 940px;
   margin:  0 auto;
   position: relative;
   top: 10px;
   border-radius: 20px;
-  
+  overflow: auto;
 }
 
 .content{
@@ -54,37 +54,6 @@ a:hover {
   position: relative;
   top: 20px;
   left: 3%;
-}
-
-.dash_student{
-  width: 300px;
-  height: 150px;
-  background-color: rgb(255, 255, 255);
-  border: solid black;
-  margin: 20px;
-  position: relative;
-  left:20px;
-  border-radius: 20px;
-}
-.dash_course{
-  width: 300px;
-  height: 150px;
-  background-color: rgb(255, 255, 255);
-  border: solid rgb(0, 0, 0);
-  margin: 20px;
-  position: relative;
-  left:20px;
-  border-radius: 20px;
-}
-.dash_college{
-  width: 300px;
-  height: 150px;
-  background-color: rgb(255, 255, 255);
-  border: solid black;
-  margin: 20px;
-  position: relative;
-  left:20px;
-  border-radius: 20px;
 }
 
 .btn {
