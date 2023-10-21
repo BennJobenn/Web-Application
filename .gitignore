@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/flask,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask,python
 
@@ -8,6 +9,8 @@ instance/*
 .env
 
 ### Flask.Python Stack ###
+=======
+>>>>>>> 7d64d999f6ccf4b003003a3679266802a4d03c97
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -73,6 +76,10 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
+<<<<<<< HEAD
+=======
+.webassets-cache
+>>>>>>> 7d64d999f6ccf4b003003a3679266802a4d03c97
 
 # Scrapy stuff:
 .scrapy
@@ -129,6 +136,10 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+<<<<<<< HEAD
+=======
+.env
+>>>>>>> 7d64d999f6ccf4b003003a3679266802a4d03c97
 .venv
 env/
 venv/
@@ -166,6 +177,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+<<<<<<< HEAD
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -260,3 +272,5 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,python
+=======
+>>>>>>> 7d64d999f6ccf4b003003a3679266802a4d03c97
