@@ -48,14 +48,14 @@ def college():
     return render_template("college.html", colleges=colleges)
 
 
-@views.route('/editing_stud')
-def edit_student():
-    return render_template("edit_student.html")
-@views.route('/editing_cour')
-def edit_course():
-    return render_template("edit_course.html")
-@views.route('/editing_coll')
-def edit_college():
-    return render_template("edit_college.html")
+# @views.route('/editing_stud')
+# def edit_student():
+#     return render_template("edit_student.html")
+# @views.route('/editing_cour')
+# def edit_course():
+#     return render_template("edit_course.html")
+# @views.route('/editing_coll')
+# def edit_college():
+#     return render_template("edit_college.html")
 
 

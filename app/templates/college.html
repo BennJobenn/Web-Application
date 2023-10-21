@@ -35,13 +35,24 @@
         <td>{{college.code}}</td>
         <td>{{college.name}}</td>
         <td>
-          <button type="button" style="margin-right: 20px;" class="btn btn-secondary" >View</button>
-          <a href="/editing_coll" type="button" style="margin-right: 20px;" class="btn btn-warning" >Edit</a>
+          <button type="button" style="margin-right: 20px;" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#collegeform">
+            Edit
+          </button>
           <button type="button" class="btn btn-danger" onclick="return confirm('Delete college data?')" >Delete</button>
           </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <div class="modal fade" id="collegeform" tabindex="-1" aria-labelledby="editform" aria-hidden="true">
+    <div style="background: transparent;" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h2>NEEDS FORM TO ACCEPT DATA FROM CORRESPONDING COLLEGE DATA</h2>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
