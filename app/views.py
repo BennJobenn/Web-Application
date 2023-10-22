@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, jsonify
 from app.models import studentmodel, coursemodel, collegemodel
 
 
@@ -48,14 +48,29 @@ def college():
     return render_template("college.html", colleges=colleges)
 
 
-# @views.route('/editing_stud')
-# def edit_student():
-#     return render_template("edit_student.html")
-# @views.route('/editing_cour')
-# def edit_course():
-#     return render_template("edit_course.html")
-# @views.route('/editing_coll')
-# def edit_college():
-#     return render_template("edit_college.html")
 
+@views.route("/college/edit/<string:college_code>", methods=["POST"])
+def edit_college(college_code):
+    new_name = request.form.get("collegeName")
+    result = collegemodel.update_college(college_code, new_name)
+    return jsonify({'success': result == 'College updated successfully'})
+
+@views.route("/course/edit/<string:course_code>", methods=["POST"])
+def edit_course(course_code):
+    new_name = request.form.get("courseName")
+    college_code = request.form.get("collegeCode")
+    result = coursemodel.update_course(course_code, new_name, college_code)
+    return jsonify({'success': result == 'Course updated successfully'})
+
+@views.route("/students/edit/<string:student_id>", methods=["POST"])
+def edit_student(student_id):
+    new_first_name = request.form.get("firstName")
+    new_last_name = request.form.get("lastName")
+    new_course_code = request.form.get("courseCode")
+    new_year = request.form.get("year")
+    new_gender = request.form.get("gender")
+
+    result = studentmodel.update_student(student_id, new_first_name, new_last_name, new_course_code, new_year, new_gender)
+
+    return jsonify({'success': result == 'Student updated successfully'})
 
