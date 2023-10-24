@@ -74,3 +74,10 @@ def edit_student(student_id):
 
     return jsonify({'success': result == 'Student updated successfully'})
 
+@views.route('/students/search', methods=['POST'])
+def search_students():
+    query = request.form.get('query')
+
+    students = studentmodel.search_student(query)
+
+    return jsonify(students)

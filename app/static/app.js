@@ -2,6 +2,8 @@ $(document).ready(function() {
 
     
 
+    
+
     // Listen for the "Edit" button click for colleges
     const editButtonsCollege = document.querySelectorAll('.edit-college');
     editButtonsCollege.forEach(button => {
@@ -176,3 +178,85 @@ $("#editStudentForm").submit(function (e) {
         },
     });
 });
+
+
+
+/////////SEARCHING INSIDE STUDENT TABLE/////////
+var $searchInput = $('#student_search');
+  var $tableBody = $('#student_table');
+
+  // Listen for keyup event in the search input
+  $searchInput.on('keyup', function() {
+    var query = $searchInput.val();
+    performSearch(query);
+  });
+
+  // Initial load to display all students
+  performSearch('');
+
+  // Function to perform the search and update the table
+  function performSearch(query) {
+    $.ajax({
+      type: 'POST',
+      url: '/students/search',
+      data: { query: query },
+      dataType: 'json',
+      success: function(data) {
+        // Clear the table
+        $tableBody.empty();
+
+        if (data.length > 0) {
+          // Populate the table with search results
+          data.forEach(function(student) {
+            var row = '<tr>';
+            row += '<td>' + student.id + '</td>';
+            row += '<td>' + student.firstname + '</td>';
+            row += '<td>' + student.lastname + '</td>';
+            row += '<td>' + student.course_code + '</td>';
+            row += '<td>' + student.gender + '</td>';
+            row += '<td>' + student.year + '</td>';
+            
+            row += '<td>';
+            row += '<button id="edit_button" name="edit_button" type="button" data-student-id="' + student.id + '"';
+            row += ' data-first-name="' + student.firstname + '"';
+            row += ' data-last-name="' + student.lastname + '"';
+            row += ' data-course-code="' + student.course_code + '"';
+            row += ' data-gender="' + student.gender + '"';
+            row += ' data-year="' + student.year + '"';
+            row += ' data-bs-toggle="modal" data-bs-target="#editStudentModal"';
+            row += ' style="margin-right: 20px;" class="btn btn-warning edit-student">Edit</button>';
+            row += '<button type="button" class="btn btn-danger" ';
+            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '</td>';
+
+            
+            row += '</tr>';
+            $tableBody.append(row);
+          });
+        } else {
+          // Display a message when no results are found
+          $tableBody.html('<tr><td colspan="6">No results found</td></tr>');
+        }
+      },
+      error: function() {
+        console.error('An error occurred during the search.');
+      }
+    });
+  }
+
+  $tableBody.on('click', '.edit-student', function() {
+    var studentId = $(this).data('student-id');
+    var firstName = $(this).data('first-name');
+    var lastName = $(this).data('last-name');
+    var courseCode = $(this).data('course-code');
+    var gender = $(this).data('gender');
+    var year = $(this).data('year');
+    
+    $("#editStudentID").val(studentId);
+    $("#editFirstName").val(firstName);
+    $("#editLastName").val(lastName);
+    $("#editCourseCode").val(courseCode);
+    $("#editYear").val(year);
+    $("#editGender").val(gender);
+    // Now you can use these variables to populate the edit modal or perform other actions.
+  });
