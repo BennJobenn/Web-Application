@@ -32,20 +32,55 @@ class studentmodel:
         
     @classmethod
     def search_student(cls, query):
+        if query == "male":
             cur = mysql.new_cursor(dictionary=True)
             cur.execute("""
-                SELECT id, firstname, lastname, course_code, gender, year
-                FROM student
-                WHERE
-                    id LIKE %s OR
-                    firstname LIKE %s OR
-                    lastname LIKE %s OR
-                    course_code LIKE %s OR
-                    year LIKE %s OR
-                    gender LIKE %s;
-            """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
-            students = cur.fetchall()
-            return students
+            SELECT id, firstname, lastname, course_code, gender, year
+            FROM student
+            WHERE
+                id LIKE %s OR
+                firstname LIKE %s OR
+                lastname LIKE %s OR
+                course_code LIKE %s OR
+                year LIKE %s OR
+                gender == "male";
+        """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
+
+        elif query == "female":
+            cur = mysql.new_cursor(dictionary=True)
+            cur.execute("""
+            SELECT id, firstname, lastname, course_code, gender, year
+            FROM student
+            WHERE
+                id LIKE %s OR
+                firstname LIKE %s OR
+                lastname LIKE %s OR
+                course_code LIKE %s OR
+                year LIKE %s OR
+                gender == "female";
+        """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
+            
+        else:
+            cur = mysql.new_cursor(dictionary=True)
+            cur.execute("""
+            SELECT id, firstname, lastname, course_code, gender, year
+            FROM student
+            WHERE
+                id LIKE %s OR
+                firstname LIKE %s OR
+                lastname LIKE %s OR
+                course_code LIKE %s OR
+                year LIKE %s OR
+                gender LIKE %s;
+        """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
+        
+        students = cur.fetchall()
+        return students
+            
+
+
+            
+            
         
 class collegemodel:
     @classmethod
