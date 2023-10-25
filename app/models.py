@@ -46,6 +46,21 @@ class studentmodel:
             """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
             students = cur.fetchall()
             return students
+    
+    @classmethod
+    def delete_student(cls, student_id):
+        try:
+            cur = mysql.new_cursor()
+            cur.execute("DELETE FROM student WHERE id = %s", (student_id,))
+            mysql.connection.commit()
+            if cur.rowcount == 0:
+                return "No student with the provided ID found"
+            return "Student deleted successfully"
+        except Exception as e:
+            return f"Failed to delete student: {str(e)}"
+
+
+
         
 class collegemodel:
     @classmethod
@@ -64,17 +79,6 @@ class collegemodel:
         cur.execute("SELECT code, name FROM college")
         colleges = cur.fetchall()
         return colleges
-    
-    @classmethod
-    def delete_college(cls, code):
-        try:
-            cursor = mysql.connection.cursor(dictionary=True)
-            cursor.execute("DELETE FROM college WHERE code = %s", (code,))
-            mysql.connection.commit()
-            cursor.close()
-            return "College deleted successfully"
-        except Exception as e:
-            return f"Failed to delete college: {str(e)}"
         
     @classmethod
     def update_college(cls, code, new_name):
@@ -85,6 +89,7 @@ class collegemodel:
             return "College updated successfully"
         except Exception as e:
             return f"Failed to update college: {str(e)}"
+        
     @classmethod
     def search_college(cls, query):
             cur = mysql.new_cursor(dictionary=True)
@@ -97,7 +102,18 @@ class collegemodel:
             """, (f'%{query}%', f'%{query}%'))
             colleges = cur.fetchall()
             return colleges
-
+    
+    @classmethod
+    def delete_college(cls, college_code):
+        try:
+            cur = mysql.new_cursor()
+            cur.execute("DELETE FROM college WHERE code = %s", (college_code,))
+            mysql.connection.commit()
+            if cur.rowcount == 0:
+                return "No College with the provided Code found"
+            return "College deleted successfully"
+        except Exception as e:
+            return f"Failed to delete college: {str(e)}"
 
 class coursemodel:
     @classmethod
@@ -138,3 +154,18 @@ class coursemodel:
             """, (f'%{query}%', f'%{query}%', f'%{query}%'))
             courses = cur.fetchall()
             return courses
+    
+    @classmethod
+    def delete_course(cls, course_code):
+        try:
+            cur = mysql.new_cursor()
+            cur.execute("DELETE FROM course WHERE code = %s", (course_code,))
+            mysql.connection.commit()
+            
+            if cur.rowcount > 0:
+                return "Course deleted successfully"
+            else:
+                return "No Course with the provided Code found"
+        
+        except Exception as e:
+            return f"Failed to delete course: {str(e)}"

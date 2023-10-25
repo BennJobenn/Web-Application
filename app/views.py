@@ -5,7 +5,7 @@ from app.models import studentmodel, coursemodel, collegemodel
 views = Blueprint('views', __name__)
 
 
-#ROUTES
+#ROUTES/////////
 @views.route('/')
 def index():
     return render_template("index.html")
@@ -50,7 +50,7 @@ def college():
     return render_template("college.html", colleges=colleges)
 
 
-#EDITING
+#EDITING///////////////////////////////
 @views.route("/college/edit/<string:college_code>", methods=["POST"])
 def edit_college(college_code):
     new_name = request.form.get("collegeName")
@@ -77,7 +77,7 @@ def edit_student(student_id):
     return jsonify({'success': result == 'Student updated successfully'})
 
 
-#SEARCHING
+#SEARCHING////////////////////////////////
 @views.route('/students/search', methods=['POST'])
 def search_students():
     query = request.form.get('query')
@@ -101,3 +101,24 @@ def search_college():
     colleges = collegemodel.search_college(query)
 
     return jsonify(colleges)
+
+
+#DELETING///////////////////////////////
+@views.route("/students/delete/<string:student_id>", methods=["POST"])
+def delete_student(student_id):
+    result = studentmodel.delete_student(student_id)
+
+    return jsonify({'success': result == 'Student deleted successfully'})
+
+@views.route("/course/delete/<string:course_code>", methods=["POST"])
+def delete_course(course_code):
+    result = coursemodel.delete_course(course_code)
+
+    return jsonify({'success': result == 'Course deleted successfully'})
+
+
+@views.route("/college/delete/<string:college_code>", methods=["POST"])
+def delete_college(college_code):
+    result = collegemodel.delete_college(college_code)
+
+    return jsonify({'success': result == 'College deleted successfully'})

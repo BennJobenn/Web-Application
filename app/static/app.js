@@ -63,6 +63,40 @@ $(document).ready(function() {
         });
     });
 
+    // const deleteStudentButton = document.querySelectorAll('.delete-student')
+    // deleteStudentButton.forEach(button =>{
+    //   button.addEventListener('click', () =>{
+    //     const studentID = button.getAttribute('data-student-id');
+    //     const firstName = button.getAttribute('data-first-name');
+    //     const lastName = button.getAttribute('data-last-name');  
+
+    //     const deleteStudentIDField = document.getElementById('deletestudentid');
+    //     const deleteStudentFNAMEField = document.getElementById('deletestudentfname');
+    //     const deleteStudentLNAMEField = document.getElementById('deletestudentlname');
+
+    //     deleteStudentIDField.value = studentID;
+    //     deleteStudentFNAMEField.value = firstName;
+    //     deleteStudentLNAMEField.value = lastName;
+
+    //   });
+    // });
+
+    // $(".delete-student").click(function(){
+    //   var studentId = $(this).data("student-id");
+    //   var firstName = $(this).data("first-name");
+    //   var lastName = $(this).data("last-name");
+
+    //   $("#deletestudentid").val(studentId);
+    //   $("#deletestudentfname").val(firstName);
+    //   $("#deletestudentlname").val(lastName);
+    // });
+
+    // $("#deletestudentform").submit(function (e){
+    //   e.preventDefault();
+    //   var studentId = $("#deletestudentid").val()
+    //   var studentId = $("#deletestudentid").val()
+    //   var studentId = $("#deletestudentid").val()
+    // })
 
 
     ////// EDIT //////
@@ -225,8 +259,8 @@ var $searchInput = $('#student_search');
             row += ' data-year="' + student.year + '"';
             row += ' data-bs-toggle="modal" data-bs-target="#editStudentModal"';
             row += ' style="margin-right: 20px;" class="btn btn-warning edit-student">Edit</button>';
-            row += '<button type="button" class="btn btn-danger" ';
-            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '<button type="button" data-student-id="' + student.id + '"';
+            row += 'class="btn btn-danger delete-student" >Delete</button>';
             row += '</td>';
 
             
@@ -259,6 +293,28 @@ var $searchInput = $('#student_search');
     $("#editYear").val(year);
     $("#editGender").val(gender);
     // Now you can use these variables to populate the edit modal or perform other actions.
+  });
+  
+  
+  $tableBody.on('click', '.delete-student', function () {
+    var studentId = $(this).data('student-id');
+
+    // Display a confirmation dialog (optional)
+    if (confirm("Are you sure you want to delete this student?")) {
+      $.ajax({
+        type: 'POST',
+        url: `/students/delete/${studentId}`,
+        success: function (response) {
+            if (response.success) {
+                alert("Student deleted successfully");
+                window.location.reload(); // Or update your table without refreshing the page
+            } else {
+                alert("Failed to delete student");
+            }
+        },
+    });
+    
+    }
   });
 
 
@@ -298,8 +354,8 @@ var $courseInput = $('#course_search');
             row += 'data-course-name="' + course.name + '"';
             row += 'data-college-code="' + course.college_code + '"';
             row += 'data-bs-toggle="modal" data-bs-target="#editCourseModal" >Edit</button>';
-            row += '<button type="button" class="btn btn-danger" ';
-            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '<button type="button" data-course-code="'+ course.code  +'" ';
+            row += 'class="btn btn-danger delete-course" >Delete</button>';
             row += '</td>';
             row += '</tr>';
             $tablecourse.append(row);
@@ -314,7 +370,7 @@ var $courseInput = $('#course_search');
       }
     });
 }
-$tablecourse.on('click', '.edit-course', function() {
+  $tablecourse.on('click', '.edit-course', function() {
     var courseCode = $(this).data("course-code");
     var courseName = $(this).data("course-name");
     var collegeCode = $(this).data("college-code");
@@ -324,6 +380,32 @@ $tablecourse.on('click', '.edit-course', function() {
     $("#editCollegeCode").val(collegeCode);
     // Now you can use these variables to populate the edit modal or perform other actions.
     });
+  
+  $tablecourse.on('click', '.delete-course', function () {
+    var courseCode = $(this).data('course-code');
+    var $button = $(this);  // Store a reference to the clicked button
+
+    if (confirm("Are you sure you want to delete this course? This will also delete its corresponding students as well!")) {
+        $.ajax({
+            type: 'POST',
+            url: `/course/delete/${courseCode}`,
+            success: function (response) {
+                if (response.success) {
+                    alert("Course deleted successfully");
+                    $button.closest("tr").remove();  // Remove the row from the table
+                } else {
+                    alert("Failed to delete course");
+                }
+            },
+            error: function () {
+                alert("An error occurred while trying to delete the course.");
+            }
+        });
+    }
+});
+  
+
+  
 
 
 var $collegeInput = $('#college_search');
@@ -359,8 +441,8 @@ var $collegeInput = $('#college_search');
             row += '<button type="button" style="margin-right: 20px;" class="btn btn-warning edit-college" data-college-code="' + college.code + '"';
             row += 'data-college-name="' + college.name + '"';
             row += 'data-bs-toggle="modal" data-bs-target="#editCollegeModal">Edit</button>';
-            row += '<button type="button" class="btn btn-danger" ';
-            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '<button type="button" data-college-code="'+ college.code + '" ';
+            row += 'class="btn btn-danger delete-college" >Delete</button>';
             row += '</td>';
             row += '</tr>';
             $tablecollege.append(row);
@@ -374,7 +456,8 @@ var $collegeInput = $('#college_search');
         console.error('An error occurred during the search.');
       }
     });
-  $tablecollege.on('click', '.edit-college', function() {
+}
+    $tablecollege.on('click', '.edit-college', function() {
       var collegeCode = $(this).data("college-code");
       var collegeName = $(this).data("college-name");
 
@@ -382,4 +465,30 @@ var $collegeInput = $('#college_search');
       $("#editCollegeName").val(collegeName);
     // Now you can use these variables to populate the edit modal or perform other actions.
     });
-}
+
+    $tablecollege.on('click', '.delete-college', function () {
+      var collegeCode = $(this).data('college-code');
+  
+      // Store a reference to the clicked button for use inside the success callback
+      var $button = $(this);
+  
+      // Display a confirmation dialog (optional)
+      if (confirm("Are you sure you want to delete this college? This will also delete its corresponding courses and students as well!")) {
+          $.ajax({
+              type: "POST",
+              url: `/college/delete/${collegeCode}`, // Update the URL
+              success: function (response) {
+                  if (response.success) {
+                      alert("College deleted successfully");
+                      // Remove the row from the table
+                      $button.closest("tr").remove();
+                  } else {
+                      alert("Failed to delete college");
+                  }
+              },
+          });
+      }
+  });
+  
+
+

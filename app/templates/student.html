@@ -89,9 +89,10 @@
           data-year="{{ student.year }}"
           data-bs-toggle="modal"
           data-bs-target="#editStudentModal" style="margin-right: 20px;" class="btn btn-warning edit-student">
-            Edit
+            Edit deletestudentmodal
           </button>
-          <button type="button" class="btn btn-danger" >Delete</button>
+          <button type="button" data-student-id="{{student.id}}"
+          class="btn btn-danger delete-student" >Delete</button>
         </td>
       </tr>
       {% endfor %}
@@ -157,5 +158,35 @@
         </form>
       </div>
     </div>
+
+    <!-- <div class="modal fade" id="deletestudentmodal" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form id="deletestudentform" method="POST">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Delete Student Data?</h4>
+            </div>
+            <div class="modal-body">
+              <h5>Are you sure you want to delete"</h5>
+              <div class="form-group">
+                <label for="deletestudentid">ID</label>
+                <input type="text" class="form-control" id="deletestudentid" name="deletestudentid" placeholder="Student ID" readonly>
+              </div>
+              <div class="form-group">
+                <label for="deletestudentfname">Firstname</label>
+                <input type="text" class="form-control" id="deletestudentfname" name="deletestudentfname" placeholder="Student firstname" readonly>
+              </div>
+              <div class="form-group">
+                <label for="deletestudentlname">Lastname</label>
+                <input type="text" class="form-control" id="deletestudentlname" name="deletestudentlname" placeholder="Student lastname" readonly>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="deletebuttonstudent">Delete</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
   
 {% endblock %}

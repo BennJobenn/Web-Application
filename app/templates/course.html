@@ -53,7 +53,8 @@
           data-course-name="{{ course.name }}"
           data-college-code="{{ course.college_code }}"
           data-bs-toggle="modal" data-bs-target="#editCourseModal" >Edit</button>
-          <button type="button" class="btn btn-danger" onclick="return confirm('Delete course data?')" >Delete</button>
+          <button type="button" data-course-code="{{ course.code }}"
+          class="btn btn-danger delete-course" >Delete</button>
           </td>
       </tr>
       {% endfor %}
