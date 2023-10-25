@@ -42,14 +42,17 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="course_table">
       {% for course in courses %}
       <tr style="font-size: 17px;">
         <td>{{course.code}}</td>
         <td>{{course.name}}</td>
         <td>{{course.college_code}}</td>
         <td>
-          <button type="button" style="margin-right: 20px;" class="btn btn-warning edit-course" data-course-code="{{ course.code }}" data-course-name="{{ course.name }}" data-college-code="{{ course.college_code }}" data-bs-toggle="modal" data-bs-target="#editCourseModal" >Edit</button>
+          <button id="edit_course" name="edit_course" type="button" style="margin-right: 20px;" class="btn btn-warning edit-course" data-course-code="{{ course.code }}"
+          data-course-name="{{ course.name }}"
+          data-college-code="{{ course.college_code }}"
+          data-bs-toggle="modal" data-bs-target="#editCourseModal" >Edit</button>
           <button type="button" class="btn btn-danger" onclick="return confirm('Delete course data?')" >Delete</button>
           </td>
       </tr>

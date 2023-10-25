@@ -113,3 +113,16 @@ class coursemodel:
             return "Course updated successfully"
         except Exception as e:
             return f"Failed to update course: {str(e)}"
+    @classmethod
+    def search_course(cls, query):
+            cur = mysql.new_cursor(dictionary=True)
+            cur.execute("""
+                SELECT code, name, college_code
+                FROM course
+                WHERE
+                    code LIKE %s OR
+                    name LIKE %s OR
+                    college_code LIKE %s;
+            """, (f'%{query}%', f'%{query}%', f'%{query}%'))
+            courses = cur.fetchall()
+            return courses

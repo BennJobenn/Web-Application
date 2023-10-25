@@ -260,3 +260,68 @@ var $searchInput = $('#student_search');
     $("#editGender").val(gender);
     // Now you can use these variables to populate the edit modal or perform other actions.
   });
+
+
+  ////COURSE SEARCH TABLE/////
+var $courseInput = $('#course_search');
+  var $tablecourse = $('#course_table');
+
+  // Listen for keyup event in the search input
+  $courseInput.on('keyup', function() {
+    var query = $courseInput.val();
+    performSearch_course(query);
+  });
+
+  // Initial load to display all students
+  performSearch_course('');
+
+  // Function to perform the search and update the table
+  function performSearch_course(query) {
+    $.ajax({
+      type: 'POST',
+      url: '/course/search',
+      data: { query: query },
+      dataType: 'json',
+      success: function(data) {
+        // Clear the table
+        $tablecourse.empty();
+
+        if (data.length > 0) {
+          // Populate the table with search results
+          data.forEach(function(course) {
+            var row = '<tr>';
+            row += '<td>' + course.code + '</td>';
+            row += '<td>' + course.name + '</td>';
+            row += '<td>' + course.college_code + '</td>';
+            row += '<td>';
+            row += '<button id="edit_course" name="edit_course" type="button" style="margin-right: 20px;" class="btn btn-warning edit-course" data-course-code="' + course.code + '"';
+            row += 'data-course-name="' + course.name + '"';
+            row += 'data-college-code="' + course.college_code + '"';
+            row += 'data-bs-toggle="modal" data-bs-target="#editCourseModal" >Edit</button>';
+            row += '<button type="button" class="btn btn-danger" ';
+            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '</td>';
+            row += '</tr>';
+            $tablecourse.append(row);
+          });
+        } else {
+          // Display a message when no results are found
+          $tablecourse.html('<tr><td colspan="6">No results found</td></tr>');
+        }
+      },
+      error: function() {
+        console.error('An error occurred during the search.');
+      }
+    });
+}
+    $tablecourse.on('click', '.edit-student', function() {
+        var courseCode = $(this).data("course-code");
+        var courseName = $(this).data("course-name");
+        var collegeCode = $(this).data("college-code");
+
+        $("#editCourseCode").val(courseCode);
+        $("#editCourseName").val(courseName);
+        $("#editCollegeCode").val(collegeCode);
+        // Now you can use these variables to populate the edit modal or perform other actions.
+      });
+  

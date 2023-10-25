@@ -81,3 +81,11 @@ def search_students():
     students = studentmodel.search_student(query)
 
     return jsonify(students)
+
+@views.route('/course/search', methods=['POST'])
+def search_course():
+    query = request.form.get('query')
+
+    courses = coursemodel.search_course(query)
+
+    return jsonify(courses)
