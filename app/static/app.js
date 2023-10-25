@@ -314,14 +314,14 @@ var $courseInput = $('#course_search');
       }
     });
 }
-    $tablecourse.on('click', '.edit-student', function() {
-        var courseCode = $(this).data("course-code");
-        var courseName = $(this).data("course-name");
-        var collegeCode = $(this).data("college-code");
+$tablecourse.on('click', '.edit-course', function() {
+    var courseCode = $(this).data("course-code");
+    var courseName = $(this).data("course-name");
+    var collegeCode = $(this).data("college-code");
 
-        $("#editCourseCode").val(courseCode);
-        $("#editCourseName").val(courseName);
-        $("#editCollegeCode").val(collegeCode);
-        // Now you can use these variables to populate the edit modal or perform other actions.
-      });
+    $("#editCourseCode").val(courseCode);
+    $("#editCourseName").val(courseName);
+    $("#editCollegeCode").val(collegeCode);
+    // Now you can use these variables to populate the edit modal or perform other actions.
+    });
   
