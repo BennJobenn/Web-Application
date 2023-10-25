@@ -4,6 +4,8 @@ from app.models import studentmodel, coursemodel, collegemodel
 
 views = Blueprint('views', __name__)
 
+
+#ROUTES
 @views.route('/')
 def index():
     return render_template("index.html")
@@ -48,7 +50,7 @@ def college():
     return render_template("college.html", colleges=colleges)
 
 
-
+#EDITING
 @views.route("/college/edit/<string:college_code>", methods=["POST"])
 def edit_college(college_code):
     new_name = request.form.get("collegeName")
@@ -74,6 +76,8 @@ def edit_student(student_id):
 
     return jsonify({'success': result == 'Student updated successfully'})
 
+
+#SEARCHING
 @views.route('/students/search', methods=['POST'])
 def search_students():
     query = request.form.get('query')
@@ -89,3 +93,11 @@ def search_course():
     courses = coursemodel.search_course(query)
 
     return jsonify(courses)
+
+@views.route('/college/search', methods=['POST'])
+def search_college():
+    query = request.form.get('query')
+
+    colleges = collegemodel.search_college(query)
+
+    return jsonify(colleges)

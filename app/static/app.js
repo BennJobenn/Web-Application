@@ -324,4 +324,62 @@ $tablecourse.on('click', '.edit-course', function() {
     $("#editCollegeCode").val(collegeCode);
     // Now you can use these variables to populate the edit modal or perform other actions.
     });
-  
+
+
+var $collegeInput = $('#college_search');
+  var $tablecollege = $('#college_table');
+
+  // Listen for keyup event in the search input
+  $collegeInput.on('keyup', function() {
+    var query = $collegeInput.val();
+    performSearch_college(query);
+  });
+
+  // Initial load to display all students
+  performSearch_college('');
+
+  // Function to perform the search and update the table
+  function performSearch_college(query) {
+    $.ajax({
+      type: 'POST',
+      url: '/college/search',
+      data: { query: query },
+      dataType: 'json',
+      success: function(data) {
+        // Clear the table
+        $tablecollege.empty();
+
+        if (data.length > 0) {
+          // Populate the table with search results
+          data.forEach(function(college) {
+            var row = '<tr>';
+            row += '<td>' + college.code + '</td>';
+            row += '<td>' + college.name + '</td>';
+            row += '<td>';
+            row += '<button type="button" style="margin-right: 20px;" class="btn btn-warning edit-college" data-college-code="' + college.code + '"';
+            row += 'data-college-name="' + college.name + '"';
+            row += 'data-bs-toggle="modal" data-bs-target="#editCollegeModal">Edit</button>';
+            row += '<button type="button" class="btn btn-danger" ';
+            row += 'onclick="return confirm(\'Delete student data?\')">Delete</button>';
+            row += '</td>';
+            row += '</tr>';
+            $tablecollege.append(row);
+          });
+        } else {
+          // Display a message when no results are found
+          $tablecollege.html('<tr><td colspan="6">No results found</td></tr>');
+        }
+      },
+      error: function() {
+        console.error('An error occurred during the search.');
+      }
+    });
+  $tablecollege.on('click', '.edit-college', function() {
+      var collegeCode = $(this).data("college-code");
+      var collegeName = $(this).data("college-name");
+
+      $("#editCollegeCode").val(collegeCode);
+      $("#editCollegeName").val(collegeName);
+    // Now you can use these variables to populate the edit modal or perform other actions.
+    });
+}

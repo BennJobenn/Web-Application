@@ -33,15 +33,15 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="college_table">
       {% for college in colleges %}
       <tr  style="font-size: 17px;">
         <td>{{college.code}}</td>
         <td>{{college.name}}</td>
         <td>
-          <button type="button" style="margin-right: 20px;" class="btn btn-warning edit-college" data-college-code="{{ college.code }}" data-college-name="{{ college.name }}" data-bs-toggle="modal" data-bs-target="#editCollegeModal">
-            Edit
-          </button>
+          <button type="button" style="margin-right: 20px;" class="btn btn-warning edit-college" data-college-code="{{ college.code }}"
+          data-college-name="{{ college.name }}"
+          data-bs-toggle="modal" data-bs-target="#editCollegeModal">Edit</button>
           <button type="button" class="btn btn-danger" onclick="return confirm('Delete college data?')" >Delete</button>
           </td>
       </tr>

@@ -39,6 +39,7 @@ a:hover {
 
 .contain{
   background: linear-gradient(90deg, rgb(230, 244, 236), rgb(246, 255, 248));
+  box-shadow: -15px 15px 5px 5px rgba(6, 6, 6, 0.396);
   width: 1810px;
   min-height: 940px;
   margin:  0 auto;
@@ -46,6 +47,7 @@ a:hover {
   top: 10px;
   border-radius: 20px;
   overflow: auto;
+  
 }
 
 .content{
