@@ -18,7 +18,13 @@ def create_app():
     mysql.init_app(app)
 
 
-    from .views import views
+    from app.routes.studentroute import studentroute
+    app.register_blueprint(studentroute)
 
-    app.register_blueprint(views, url_prefix = "/")
+    from app.routes.courseroute import courseroute
+    app.register_blueprint(courseroute)
+
+    from app.routes.collegeroute import collegeroute
+    app.register_blueprint(collegeroute)
+
     return app
