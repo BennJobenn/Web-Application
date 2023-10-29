@@ -24,6 +24,7 @@ def student():
     courses = coursemodel.get_courses()
     return render_template("student.html", students= students, courses=courses)
 
+
 @studentroute.route("/students/edit/<string:student_id>", methods=["POST"])
 def edit_student(student_id):
     new_first_name = request.form.get("firstName")
