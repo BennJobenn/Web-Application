@@ -50,3 +50,9 @@ def delete_student(student_id):
     result = studentmodel.delete_student(student_id)
 
     return jsonify({'success': result == 'Student deleted successfully'})
+
+
+
+@studentroute.route("/profile")
+def profiles():
+    return render_template("profile.html")
