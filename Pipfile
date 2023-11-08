@@ -10,6 +10,7 @@ mysql-connector = "*"
 mysql = "*"
 flask-mysql = "*"
 mysql-connector-python = "*"
+cloudinary = "*"
 
 [dev-packages]
 
