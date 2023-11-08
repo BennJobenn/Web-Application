@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block title %}Profiles{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="image">Choose an image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    
+    <label for="name">Name or Identification:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <button type="submit">Upload</button>
+</form>
+{% endblock %}
