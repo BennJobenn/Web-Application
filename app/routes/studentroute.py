@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, flash
 from app.models.studentmodels import studentmodel
 from app.models.coursemodels import coursemodel
 
@@ -7,6 +7,8 @@ studentroute = Blueprint('studentroute', __name__)
 @studentroute.route('/')
 def index():
     return render_template("index.html")
+
+from flask import Flask, render_template, request, flash, redirect, url_for
 
 @studentroute.route('/students', methods=['GET', 'POST'])
 def student():
@@ -17,12 +19,13 @@ def student():
         course = request.form.get("inputCourse")
         year = request.form.get("inputYear")
         gender = request.form.get("inputGender")
-        studentmodel.create_student(id, fname, lname, course, year, gender)
-
+        result = studentmodel.create_student(id, fname, lname, course, year, gender)
+        flash(result)
 
     students = studentmodel.get_students()
     courses = coursemodel.get_courses()
-    return render_template("student.html", students= students, courses=courses)
+    return render_template("student.html", students=students, courses=courses)
+
 
 
 @studentroute.route("/students/edit/<string:student_id>", methods=["POST"])
@@ -53,6 +56,6 @@ def delete_student(student_id):
 
 
 
-@studentroute.route("/profile")
-def profiles():
-    return render_template("profile.html")
+# @studentroute.route("/profile")
+# def profiles():
+#     return render_template("profile.html")

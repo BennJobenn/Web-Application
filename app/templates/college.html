@@ -3,19 +3,29 @@
 
 {% block content %}
 <br>
+<button type="button" data-bs-toggle="modal" data-bs-target="#addcollegemodal" class="btn btn-primary" style="margin-left: 20px; margin-top: 10px; height: 50px; font-size: 20px; font-family: Arial, Helvetica, sans-serif; margin-right: -200px;">ADD COLLEGE</button>
+<div class="modal fade" id="addcollegemodal" role="dialog" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width: auto; position: relative; left: 50%; transform: translateX(-50%); border-radius: 25px; background: linear-gradient(90deg, rgb(51, 87, 92), rgb(34, 34, 56));">
+      <div class="modal-header" style="border-radius: 25px;">
+
 <div class="form-group" style="margin-left: 10px;">
     <form method="POST">
       <div class="form-row">
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-5">
               <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOLLEGE_CD" name="inputCOLLEGE_CD" placeholder="College Code" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-12">
               <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputCOLLEGE_NM" name="inputCOLLEGE_NM" placeholder="College Name" required>
           </div>
 
       </div>
-      <button type="submit" onclick="return confirm('Confirm adding college to data?')" class="btn btn-primary">Add College</button>
+      <button type="submit" onclick="return confirm('Confirm adding college to data?')" class="btn btn-primary" style="margin-top: 50px; position: relative; left: 50%; transform: translateX(-50%);">Add College</button>
   </form>
+  </div>
+  </div>
+  </div>
+  </div>
   </div>
   
   <br>
@@ -24,6 +34,17 @@
     <input type="text" id="college_search" name="college_search" placeholder="Search" class="input">
     </form>
   <br>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <ul class="flashes" style="font-size: 20px;">
+          {% for message in messages %}
+              <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endwith %}
+
 
 <table class="table table-striped table-bordered" style="text-align: left">
     <thead class="thead-dark">

@@ -111,6 +111,7 @@ $(document).ready(function() {
 
     $("#editCollegeForm").submit(function (e) {
         e.preventDefault();
+        $('#editCollegeModal').modal('hide');
         var collegeCode = $("#editCollegeCode").val();
         var newCollegeName = $("#editCollegeName").val();
 
@@ -145,6 +146,7 @@ $(document).ready(function() {
 
 $("#editCourseForm").submit(function (e) {
     e.preventDefault();
+    $('#editCourseModal').modal('hide');
     var courseCode = $("#editCourseCode").val();
     var newCourseName = $("#editCourseName").val();
     var collegeCode = $("#editCollegeCode").val(); 
@@ -181,10 +183,12 @@ $(".edit-student").click(function () {
     $("#editCourseCode").val(courseCode);
     $("#editYear").val(year);
     $("#editGender").val(gender);
-});
-
-$("#editStudentForm").submit(function (e) {
+  });
+  
+  
+  $("#editStudentForm").submit(function (e) {
     e.preventDefault();
+    $('#editStudentModal').modal('hide');
     var studentId = $("#editStudentID").val();
     var newFirstName = $("#editFirstName").val();
     var newLastName = $("#editLastName").val();

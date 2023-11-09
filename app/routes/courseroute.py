@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, flash
 from app.models.coursemodels import coursemodel
 from app.models.collegemodels import collegemodel
 
@@ -10,8 +10,8 @@ def course():
         code = request.form.get("inputCOURSE_CD")
         name = request.form.get("inputCOURSE_NM")
         collegecode = request.form.get("inputCOURSE_CLG")
-        coursemodel.create_course(name, code, collegecode)
-
+        result = coursemodel.create_course(name, code, collegecode)
+        flash(result)
 
     colleges = collegemodel.get_colleges()
     courses = coursemodel.get_courses()

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, flash
 from app.models.collegemodels import collegemodel
 
 collegeroute = Blueprint('collegeroute', __name__)
@@ -8,7 +8,8 @@ def college():
     if request.method == "POST":
         code = request.form.get("inputCOLLEGE_CD")
         name = request.form.get("inputCOLLEGE_NM")
-        collegemodel.create_college(name, code)
+        result = collegemodel.create_college(name, code)
+        flash(result)
 
     colleges = collegemodel.get_colleges()
     return render_template("college.html", colleges=colleges)
