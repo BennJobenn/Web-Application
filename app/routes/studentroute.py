@@ -8,8 +8,6 @@ studentroute = Blueprint('studentroute', __name__)
 def index():
     return render_template("index.html")
 
-from flask import Flask, render_template, request, flash, redirect, url_for
-
 @studentroute.route('/students', methods=['GET', 'POST'])
 def student():
     if request.method == "POST":
