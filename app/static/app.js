@@ -242,7 +242,7 @@ var $searchInput = $('#student_search');
       success: function(data) {
         // Clear the table
         $tableBody.empty();
-
+  
         if (data.length > 0) {
           // Populate the table with search results
           data.forEach(function(student) {
@@ -251,6 +251,7 @@ var $searchInput = $('#student_search');
             row += '<td>' + student.firstname + '</td>';
             row += '<td>' + student.lastname + '</td>';
             row += '<td>' + student.course_code + '</td>';
+            row += '<td>' + student.collegename + '</td>';
             row += '<td>' + student.gender + '</td>';
             row += '<td>' + student.year + '</td>';
             
@@ -264,10 +265,9 @@ var $searchInput = $('#student_search');
             row += ' data-bs-toggle="modal" data-bs-target="#editStudentModal"';
             row += ' style="margin-right: 20px;" class="btn btn-warning edit-student">Edit</button>';
             row += '<button type="button" data-student-id="' + student.id + '"';
-            row += 'class="btn btn-danger delete-student" >Delete</button>';
+            row += ' class="btn btn-danger delete-student">Delete</button>';
             row += '</td>';
-
-            
+  
             row += '</tr>';
             $tableBody.append(row);
           });
@@ -281,6 +281,7 @@ var $searchInput = $('#student_search');
       }
     });
   }
+  
 
   $tableBody.on('click', '.edit-student', function() {
     var studentId = $(this).data('student-id');

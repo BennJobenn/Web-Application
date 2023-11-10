@@ -15,9 +15,15 @@ class studentmodel:
     @classmethod
     def get_students(cls):
         cur = mysql.new_cursor(dictionary=True)
-        cur.execute("SELECT id, firstname, lastname, course_code, year, gender FROM student")
+        cur.execute("""
+            SELECT student.id, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.year, student.gender
+            FROM student
+            JOIN course ON student.course_code = course.code
+            JOIN college ON course.college_code = college.code
+        """)
         students = cur.fetchall()
         return students
+
     
     @classmethod
     def update_student(cls, id, firstname, lastname, course_code, year, gender):
@@ -34,16 +40,19 @@ class studentmodel:
     def search_student(cls, query):
             cur = mysql.new_cursor(dictionary=True)
             cur.execute("""
-                SELECT id, firstname, lastname, course_code, gender, year
+                SELECT student.id, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.gender, student.year
                 FROM student
+                JOIN course ON student.course_code = course.code
+                JOIN college ON course.college_code = college.code
                 WHERE
                     id LIKE %s OR
                     firstname LIKE %s OR
                     lastname LIKE %s OR
                     course_code LIKE %s OR
+                    CONCAT(college.name,'(',college.code, ')') LIKE %s OR
                     year LIKE %s OR
                     gender LIKE %s;
-            """, (f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
+            """, (f'%{query}%',f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%', f'%{query}%'))
             students = cur.fetchall()
             return students
     
