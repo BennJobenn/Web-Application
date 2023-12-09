@@ -121,7 +121,8 @@
             Edit
           </button>
           <button type="button" data-student-id="{{student.id}}"
-          class="btn btn-danger delete-student" >Delete</button>
+          class="btn btn-danger delete-student" style="margin-right: 20px;">Delete</button>
+          <button type="button" class="btn btn-info view-profile" data-view-url="{{ url_for('studentroute.view_profile', student_id=student.id) }}">View</button>
         </td>
       </tr>
       {% endfor %}

@@ -4,13 +4,123 @@
 {% block content %}
 <br>
 <br>
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <label for="image">Choose an image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
+<div class="wrapper">
     
-    <label for="name">Name or Identification:</label>
-    <input type="text" id="name" name="name" required>
+        <div class="image-container">
+            <div class="image-wrapper" style="width: 200px; height: 200px; position: relative; left: 50%; transform: translateX(-50%); border-radius: 50%; border:  solid rgba(191, 94, 29, 0.523);">
+                <form action="{{ url_for('studentroute.upload_image', student_id=student_profile.id) }}" method="post" enctype="multipart/form-data">
+                    <label for="file-input" style="cursor: pointer;">
+                        <img src="{{ student_image_url or url_for('static', filename='/css/profile.png') }}" alt="Profile Photo" id="preview-image" class="circle-image">
+                        <div class="overlay-text" style="font-size: 20px;">Upload Photo</div>
+                    </label>
+                    <input type="file" id="file-input" name="file" style="display: none;" accept="image/*" onchange="previewImage(event)" required>
+                </div>
+                    <button type="submit" id="submit-button" style="margin-top: 10px; display: none; position: relative; left: 50%; transform: translateX(-50%); border-radius: 10px;" class="btn btn-warning">Submit</button>
+                </form>
+        </div>
+        <br>
     
-    <button type="submit">Upload</button>
-</form>
+        <div class="info">
+            <h3>{{student_profile.id}}</h3>
+            <br>
+            <br>
+            <br>
+            <span class="information">{{student_profile.firstname}} {{student_profile.lastname}}</span class="information">
+            <br>
+            <br>
+            <br>
+            <span class="information">{{student_profile.course_code}}</span class="information">
+            <br>
+            <br>
+            <br>
+            <span class="information">{{student_profile.year}}</span class="information">
+            <br>
+            <br>
+            <br>
+            <span class="information">{{student_profile.gender}}</span class="information">
+        </div>
+
+
+        </div>
+
+
+<style>
+
+    .information{
+        font-size: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .info{
+        margin-top: 50px;
+    }
+
+    .wrapper{
+        width: 500px;
+        height: auto;
+        padding: 20px;
+        background-color: rgba(128, 185, 204, 0.422);
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .image-container {
+    position: relative;
+  }
+  
+  .overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    color: white;
+    transition: opacity .8s ease;
+    z-index: 1; /* Ensure the text is above the image */
+  }
+  
+  .image-wrapper:hover img {
+    filter: blur(4px); /* Apply blur on hover */
+  }
+  
+  .image-wrapper:hover .overlay-text {
+    opacity: 1;
+  }
+  .image-wrapper {
+    width: 200px;
+    height: 200px; /* Set a fixed size for the circular wrapper */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: solid;
+    overflow: hidden; /* Ensure the image is clipped to the circular shape */
+  }
+
+  .image-wrapper img {
+    width: 100%; /* Make the image fill the entire wrapper */
+    height: 100%; /* Make the image fill the entire wrapper */
+    object-fit: contain; /* Try contain instead of cover */
+  }
+</style>
+
+<script>
+    function previewImage(event) {
+        const preview = document.getElementById('preview-image');
+        const fileInput = event.target;
+        const submitButton = document.getElementById('submit-button');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                submitButton.style.display = 'block'; // Show the submit button
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+</script>
 {% endblock %}

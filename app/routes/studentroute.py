@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, jsonify, flash
+from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from app.models.studentmodels import studentmodel
 from app.models.coursemodels import coursemodel
+import cloudinary.uploader
 
 studentroute = Blueprint('studentroute', __name__)
 
@@ -54,6 +55,27 @@ def delete_student(student_id):
 
 
 
-# @studentroute.route("/profile")
-# def profiles():
-#     return render_template("profile.html")
+@studentroute.route("/profile/<string:student_id>")
+def view_profile(student_id):
+
+    student_profile = studentmodel.get_student_info(student_id)
+
+    student_image_url = studentmodel.get_image_url(student_id)
+
+    return render_template("profile.html", student_profile=student_profile, student_image_url=student_image_url)
+
+@studentroute.route('/upload_image/<string:student_id>', methods=['POST'])
+def upload_image(student_id):
+    if request.method == 'POST':
+        file = request.files['file']
+
+        # Upload the file to Cloudinary
+        result = cloudinary.uploader.upload(file)
+
+        # Access the uploaded image URL
+        image_url = result['secure_url']
+
+        # Update the student's image URL in the database
+        studentmodel.update_image_url(student_id, image_url)
+
+    return redirect(url_for('studentroute.view_profile', student_id=student_id))

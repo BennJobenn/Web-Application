@@ -67,3 +67,37 @@ class studentmodel:
             return "Student deleted successfully"
         except Exception as e:
             return f"Failed to delete student: {str(e)}"
+        
+
+    @classmethod
+    def get_student_info(cls, student_id):
+        try:
+            cur = mysql.new_cursor(dictionary=True)
+            cur.execute("SELECT * FROM student WHERE id = %s", (student_id,))
+            student = cur.fetchone()
+
+            if student:
+                # Process or return the student information
+                return student
+            else:
+                return f"No student found with ID: {student_id}"
+
+        except Exception as e:
+            return f"Failed to find student: {str(e)}"
+        
+    @classmethod
+    def get_image_url(cls, student_id):
+        cur = mysql.new_cursor(dictionary=True)
+        cur.execute("SELECT image_url FROM student WHERE id = %s", (student_id,))
+        result = cur.fetchone()
+        return result['image_url'] if result else '/static/css/profile.png'
+    
+    @classmethod
+    def update_image_url(cls, student_id, image_url):
+        try:
+            cur = mysql.new_cursor(dictionary=True)
+            cur.execute("UPDATE student SET image_url = %s WHERE id = %s", (image_url, student_id))
+            mysql.connection.commit()
+            return "Image URL updated"
+        except Exception as e:
+            return f"Image URL update failed: {str(e)}"

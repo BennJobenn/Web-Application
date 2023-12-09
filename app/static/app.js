@@ -265,8 +265,12 @@ var $searchInput = $('#student_search');
             row += ' data-bs-toggle="modal" data-bs-target="#editStudentModal"';
             row += ' style="margin-right: 20px;" class="btn btn-warning edit-student">Edit</button>';
             row += '<button type="button" data-student-id="' + student.id + '"';
-            row += ' class="btn btn-danger delete-student">Delete</button>';
-            row += '</td>';
+            row += ' class="btn btn-danger delete-student" style="margin-right: 20px;">Delete</button>';
+            var viewProfileUrl = '/profile/' + student.id;
+                    row += '<a href="' + viewProfileUrl + '"><button type="button" class="btn btn-info view-profile">View Profile</button></a>';
+
+                    row += '</td>';
+                    row += '</tr>';
   
             row += '</tr>';
             $tableBody.append(row);
