@@ -248,6 +248,15 @@ var $searchInput = $('#student_search');
           data.forEach(function(student) {
             var row = '<tr>';
             row += '<td>' + student.id + '</td>';
+            row += '<td>';
+            if (student.image_url !== null && student.image_url !== undefined) {
+                // If image URL is provided, display the image
+                row += '<img src="' + student.image_url + '" alt="Student Image" style="width:70px;">';
+            } else {
+                // If no image URL, display the static image
+                row += '<img src="/static/css/profile.png" alt="No Image" style="width:70px;">';
+            }
+            row += '</td>';
             row += '<td>' + student.firstname + '</td>';
             row += '<td>' + student.lastname + '</td>';
             row += '<td>' + student.course_code + '</td>';

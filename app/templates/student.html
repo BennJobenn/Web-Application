@@ -11,7 +11,7 @@
       <div class="modal-header" style="border-radius: 25px;">
 
 <div class="form-group" style="margin-left: 10px;">
-  <form method="POST" id="addstudentform">
+  <form method="POST" id="addstudentform" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-4">
             <input type="text" style="border: solid black 2px; border-radius: 10px;" class="form-control" id="inputID" name="inputID" placeholder="ID" required>
@@ -52,6 +52,9 @@
           </select>
         </div>
     </div>
+    <div class="form-group col-md-8">
+      <input type="file" class="form-control-file" id="inputImage" name="inputImage" accept="image/*">
+  </div>
     <button type="submit" class="btn btn-primary" onclick="return confirm('Confirm adding course to data?')" style="margin-top: 50px; position: relative; left: 50%; transform: translateX(-50%);">Add Student</button>
 </form>
 </div>
@@ -90,6 +93,7 @@
     <thead class="thead-dark">
       <tr class="table-info">
         <th scope="col">ID</th>
+        <th scope="col">Image</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Course Code</th>

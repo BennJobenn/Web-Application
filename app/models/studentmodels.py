@@ -2,11 +2,11 @@ from app import mysql
 
 class studentmodel:
     @classmethod
-    def create_student(cls, id, firstname, lastname, course_code, year, gender):
+    def create_student(cls, id, firstname, lastname, course_code, year, gender, image_url):
         try:
             cur = mysql.new_cursor(dictionary=True)
-            cur.execute("INSERT INTO student (id, firstname, lastname, course_code, year, gender) VALUES (%s, %s, %s, %s, %s, %s)",
-                        (id, firstname, lastname, course_code, year, gender))
+            cur.execute("INSERT INTO student (id, firstname, lastname, course_code, year, gender, image_url) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                        (id, firstname, lastname, course_code, year, gender, image_url))
             mysql.connection.commit()
             return "Student data added!"
         except Exception as e:
@@ -16,7 +16,7 @@ class studentmodel:
     def get_students(cls):
         cur = mysql.new_cursor(dictionary=True)
         cur.execute("""
-            SELECT student.id, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.year, student.gender
+            SELECT student.id, student.image_url, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.year, student.gender
             FROM student
             JOIN course ON student.course_code = course.code
             JOIN college ON course.college_code = college.code
@@ -40,7 +40,7 @@ class studentmodel:
     def search_student(cls, query):
             cur = mysql.new_cursor(dictionary=True)
             cur.execute("""
-                SELECT student.id, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.gender, student.year
+                SELECT student.id, student.image_url, student.firstname, student.lastname, student.course_code, CONCAT(college.name,'(',college.code, ')') AS collegename, student.gender, student.year
                 FROM student
                 JOIN course ON student.course_code = course.code
                 JOIN college ON course.college_code = college.code
