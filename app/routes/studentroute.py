@@ -22,6 +22,21 @@ def student():
 
         image_file = request.files.get('inputImage')
         if image_file:
+            # Check if the file is an allowed image type
+            allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
+            if image_file.filename.split('.')[-1].lower() not in allowed_extensions:
+                flash("Invalid file type. Please upload a valid image.", 'error')
+                return redirect(url_for('studentroute.student'))
+
+            # Check if the file size is within the limit (2 MB in this example)
+            max_file_size = 2 * 1024 * 1024  # 2 MB
+            if len(image_file.read()) > max_file_size:
+                flash(f"File size exceeds the limit of {max_file_size / (1024 * 1024)} MB.", 'error')
+                return redirect(url_for('studentroute.student'))
+
+            # Rewind the file pointer to read it again during upload
+            image_file.seek(0)
+
             # Upload the image to Cloudinary
             upload_result = cloudinary.uploader.upload(image_file)
             image_url = upload_result['secure_url']
